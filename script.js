@@ -238,7 +238,7 @@ function createPostMenu() {
   return wrap;
 }
 
-function createPost({ text, images, privacy, showAiNote }) {
+function createPost({ text, images, privacy, showAiNote, isAiGenerated }) {
   const article = document.createElement("article");
   article.className = "post card";
 
@@ -255,7 +255,14 @@ function createPost({ text, images, privacy, showAiNote }) {
   const author = document.createElement("strong");
   author.textContent = "实验用户";
   const meta = document.createElement("p");
+  meta.className = "post-meta";
   meta.textContent = `刚刚 来自 微博网页版 ${privacy}`;
+  if (isAiGenerated) {
+    const aiBadge = document.createElement("span");
+    aiBadge.className = "ai-generated-badge";
+    aiBadge.textContent = "AI生成";
+    meta.prepend(aiBadge);
+  }
   authorBlock.append(author, meta);
 
   header.append(authorBlock, createPostMenu());
@@ -302,6 +309,7 @@ function publishPost() {
     images: [...uploadedImages],
     privacy: selectedPrivacy,
     showAiNote: false,
+    isAiGenerated: selectedDeclaration === "ai",
   });
 
   timeline.prepend(post);
