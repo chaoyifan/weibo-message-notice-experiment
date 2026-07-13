@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>微博</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <span class="brand-mark">◉</span>
+          <span class="brand-text">微博</span>
+          <small>weibo.com</small>
+        </div>
+        <label class="search">
+          <span>⌕</span>
+          <input type="search" placeholder="搜索微博" />
+        </label>
+        <nav class="top-nav" aria-label="主导航">
+          <button class="nav-icon active" title="首页">⌂</button>
+          <button class="nav-icon" title="热门">♨</button>
+          <button class="nav-icon" title="视频">▣</button>
+          <button class="nav-icon message-nav" id="messageNav" type="button" title="消息" aria-label="消息">
+            ✉
+            <span class="message-badge" id="messageBadge" hidden>1</span>
+          </button>
+          <button class="nav-avatar" title="个人主页"></button>
+        </nav>
+        <div class="top-actions">
+          <button class="round-icon" title="会员">☁</button>
+          <button class="round-icon" title="设置">⚙</button>
+          <button class="round-icon" title="夜间">◐</button>
+          <button class="compose-shortcut" title="发布">✎</button>
+          <button class="accessibility">无障碍</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <aside class="sidebar card">
+        <h1>首页</h1>
+        <a class="side-link active" href="#"><span>☷</span> 全部关注</a>
+        <a class="side-link" href="#"><span>◉</span> 最新微博</a>
+        <a class="side-link" href="#"><span>♙</span> 特别关注</a>
+        <a class="side-link" href="#"><span>♟</span> 好友圈</a>
+        <div class="group-title">
+          <span>自定义分组</span>
+          <button>管理</button>
+        </div>
+        <a class="group-link" href="#">名人明星</a>
+        <a class="group-link" href="#">同事</a>
+        <a class="group-link" href="#">同学</a>
+        <a class="group-link" href="#">悄悄关注</a>
+      </aside>
+
+      <section class="feed-column">
+        <section class="composer card" aria-label="发布区">
+          <div class="composer-box">
+            <textarea id="postText" maxlength="500" placeholder="有什么新鲜事想分享给大家?"></textarea>
+            <button class="declaration-trigger" id="declarationTrigger" type="button" aria-haspopup="true" aria-expanded="false">
+              <span id="declarationLabel">内容声明</span>
+              <span class="chevron">⌄</span>
+            </button>
+            <div class="dropdown declaration-menu" id="declarationMenu" role="menu">
+              <div class="dropdown-title">内容声明 <span>ⓘ</span></div>
+              <button data-value="none" data-label="无" role="menuitem">无</button>
+              <button data-value="original" data-label="内容为自主创作" role="menuitem">内容为自主创作</button>
+              <button data-value="repost" data-label="内容为转载" role="menuitem">内容为转载</button>
+              <button data-value="ai" data-label="内容由AI生成" role="menuitem">内容由AI生成</button>
+              <button data-value="fictional" data-label="内容为虚构演绎" role="menuitem">内容为虚构演绎</button>
+            </div>
+          </div>
+
+          <div class="image-preview" id="imagePreview" hidden></div>
+
+          <div class="composer-toolbar">
+            <div class="tool-group">
+              <div class="emoji-wrap">
+                <button type="button" class="tool-button" id="emojiTrigger" title="表情" aria-haspopup="true" aria-expanded="false">
+                  <span class="tool-icon icon-smile" aria-hidden="true"></span><b>表情</b>
+                </button>
+                <div class="emoji-menu" id="emojiMenu" role="menu" aria-label="常用表情">
+                  <button type="button" role="menuitem" data-emoji="😀">😀</button>
+                  <button type="button" role="menuitem" data-emoji="😄">😄</button>
+                  <button type="button" role="menuitem" data-emoji="😂">😂</button>
+                  <button type="button" role="menuitem" data-emoji="😊">😊</button>
+                  <button type="button" role="menuitem" data-emoji="😍">😍</button>
+                  <button type="button" role="menuitem" data-emoji="😎">😎</button>
+                  <button type="button" role="menuitem" data-emoji="😭">😭</button>
+                  <button type="button" role="menuitem" data-emoji="😡">😡</button>
+                  <button type="button" role="menuitem" data-emoji="👍">👍</button>
+                  <button type="button" role="menuitem" data-emoji="👏">👏</button>
+                  <button type="button" role="menuitem" data-emoji="🙏">🙏</button>
+                  <button type="button" role="menuitem" data-emoji="💪">💪</button>
+                  <button type="button" role="menuitem" data-emoji="🎉">🎉</button>
+                  <button type="button" role="menuitem" data-emoji="❤️">❤️</button>
+                  <button type="button" role="menuitem" data-emoji="🌹">🌹</button>
+                  <button type="button" role="menuitem" data-emoji="🔥">🔥</button>
+                  <button type="button" role="menuitem" data-emoji="😅">😅</button>
+                  <button type="button" role="menuitem" data-emoji="🤔">🤔</button>
+                  <button type="button" role="menuitem" data-emoji="😮">😮</button>
+                  <button type="button" role="menuitem" data-emoji="😴">😴</button>
+                </div>
+              </div>
+              <label class="tool-button upload-tool" title="图片">
+                <input id="imageInput" type="file" accept="image/*" multiple />
+                <span class="tool-icon icon-image" aria-hidden="true"></span><b>图片</b>
+              </label>
+              <button type="button" class="tool-button" title="视频">
+                <span class="tool-icon icon-video" aria-hidden="true"></span><b>视频</b>
+              </button>
+              <button type="button" class="tool-button" title="话题">
+                <span class="tool-icon icon-topic" aria-hidden="true"></span><b>话题</b>
+              </button>
+              <button type="button" class="tool-button" title="头条文章">
+                <span class="tool-icon icon-article" aria-hidden="true"></span><b>头条文章</b>
+              </button>
+              <button type="button" class="tool-button" title="更多">
+                <span class="tool-icon icon-more" aria-hidden="true"></span><b>更多</b>
+              </button>
+            </div>
+            <div class="publish-group">
+              <button class="timer" type="button" title="定时发布">◷<em>会员</em></button>
+              <div class="privacy-wrap">
+                <button class="privacy-trigger" id="privacyTrigger" type="button" aria-haspopup="true" aria-expanded="false">
+                  <span id="privacyLabel">公开</span><span>⌄</span>
+                </button>
+                <div class="dropdown privacy-menu" id="privacyMenu" role="menu">
+                  <button data-label="公开" role="menuitem">公开</button>
+                  <button data-label="粉丝" role="menuitem">粉丝</button>
+                  <button data-label="好友圈" role="menuitem">好友圈</button>
+                  <button data-label="仅自己可见" role="menuitem">仅自己可见</button>
+                  <button data-label="群可见" role="menuitem">群可见</button>
+                </div>
+              </div>
+              <button class="publish-button" id="publishButton" type="button">发送</button>
+            </div>
+          </div>
+        </section>
+
+        <nav class="feed-tabs card" aria-label="信息流筛选">
+          <a class="active" href="#">全部</a>
+          <a href="#">原创</a>
+          <a href="#">视频</a>
+          <a href="#">超话社区</a>
+          <a href="#">V+微博</a>
+          <a href="#">群微博</a>
+          <button>⌕ 高级搜索 ▾</button>
+        </nav>
+
+        <section class="timeline" id="timeline" aria-live="polite">
+          <article class="post card">
+            <div class="post-avatar avatar-one"></div>
+            <div class="post-body">
+              <header class="post-header">
+                <div>
+                  <strong>武林外传官微 <span class="vip">♛</span></strong>
+                  <p>14小时前 来自 微博网页版 已编辑</p>
+                </div>
+                <div class="post-menu-wrap">
+                  <button class="post-menu-trigger" type="button" title="更多" aria-haspopup="true" aria-expanded="false">⌄</button>
+                  <div class="post-menu" role="menu">
+                    <button role="menuitem">分享</button>
+                    <button role="menuitem">置顶</button>
+                    <button role="menuitem">推广</button>
+                    <button role="menuitem">编辑微博（限会员）</button>
+                    <button role="menuitem">转换为粉丝可见</button>
+                    <button role="menuitem">转换为朋友圈可见</button>
+                    <button role="menuitem">转换为自己可见</button>
+                    <button role="menuitem">删除</button>
+                    <button role="menuitem">开启评论精选</button>
+                  </div>
+                </div>
+              </header>
+              <p class="post-text"><a href="#">武林外传超话</a> 周末来给大家抽奖，铁粉抽小贝擦手巾一条。最近天气不太好，大家要注意安全哦！</p>
+              <div class="post-images">
+                <div class="feed-img img-a"><span>周末抽奖</span></div>
+                <div class="feed-img img-b"><span>小贝周边</span></div>
+              </div>
+              <footer class="post-actions">
+                <span><i class="action-icon icon-repost" aria-hidden="true"></i>11</span>
+                <span><i class="action-icon icon-comment" aria-hidden="true"></i>95</span>
+                <span><i class="action-icon icon-like" aria-hidden="true"></i>221</span>
+              </footer>
+            </div>
+          </article>
+
+          <article class="post card">
+            <div class="post-avatar avatar-two"></div>
+            <div class="post-body">
+              <header class="post-header">
+                <div>
+                  <strong>人民日报 <span class="vip">♛</span></strong>
+                  <p>15小时前 来自 微博网页版</p>
+                </div>
+                <div class="post-menu-wrap">
+                  <button class="post-menu-trigger" type="button" title="更多" aria-haspopup="true" aria-expanded="false">⌄</button>
+                  <div class="post-menu" role="menu">
+                    <button role="menuitem">分享</button>
+                    <button role="menuitem">置顶</button>
+                    <button role="menuitem">推广</button>
+                    <button role="menuitem">编辑微博（限会员）</button>
+                    <button role="menuitem">转换为粉丝可见</button>
+                    <button role="menuitem">转换为朋友圈可见</button>
+                    <button role="menuitem">转换为自己可见</button>
+                    <button role="menuitem">删除</button>
+                    <button role="menuitem">开启评论精选</button>
+                  </div>
+                </div>
+              </header>
+              <p class="post-text">【人民锐评：文化传承需要更多耐心】近期，社会讨论持续升温。尊重原创、保护文化表达，应成为公共讨论的基本共识。</p>
+              <div class="wide-card">人民锐评</div>
+              <footer class="post-actions">
+                <span><i class="action-icon icon-repost" aria-hidden="true"></i>43</span>
+                <span><i class="action-icon icon-comment" aria-hidden="true"></i>128</span>
+                <span><i class="action-icon icon-like" aria-hidden="true"></i>502</span>
+              </footer>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      <aside class="right-column">
+        <section class="card hot-search">
+          <header>
+            <h2>微博热搜</h2>
+            <button>⟳ 点击刷新</button>
+          </header>
+          <div class="hot-tabs"><span>我的</span><span>热搜</span></div>
+          <ol>
+            <li><b>1</b><span>司晓迪专注做好播中</span><em>205641</em></li>
+            <li><b>2</b><span>黄晓明因为小海绵全家...</span><em>53110</em></li>
+            <li><b>3</b><span>向人曝差点被LV起诉...</span><em>52323</em></li>
+            <li><b>4</b><span>女儿遭性侵母亲未报...</span><em>229320</em></li>
+            <li><b>5</b><span>台风巴威又睁眼了</span><em>10:36登顶</em></li>
+            <li><b>6</b><span>董璇被女儿提醒有人在...</span><em>63114</em></li>
+            <li><b>7</b><span>孟子义李昀锐你俩在...</span><em>175160</em></li>
+            <li><b>8</b><span>曝杨洋谈过的都是圈内人</span><em>50227</em></li>
+            <li><b>9</b><span>央视网评公职人员霸...</span><em>804462</em></li>
+            <li><b>10</b><span>黄晓明在田曦薇表...</span><em>00:38登顶</em></li>
+          </ol>
+          <button class="full-list">查看完整热搜榜单 〉</button>
+        </section>
+
+        <section class="card suggestions">
+          <header>
+            <h2>你可能感兴趣的人</h2>
+            <button>⟳ 换一换</button>
+          </header>
+          <div class="suggestion">
+            <div class="mini-avatar mini-one"></div>
+            <div><strong>爱唱歌的小7</strong><p>微博原创视频博主...</p></div>
+            <button>+关注</button>
+          </div>
+          <div class="suggestion">
+            <div class="mini-avatar mini-two"></div>
+            <div><strong>红网</strong><p>红网官方微博</p></div>
+            <button>+关注</button>
+          </div>
+          <div class="suggestion">
+            <div class="mini-avatar mini-three"></div>
+            <div><strong>网易新闻客户端</strong><p>网易新闻客户端官...</p></div>
+            <button>+关注</button>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <section class="message-view" id="messageView" aria-label="消息中心" hidden>
+      <aside class="message-sidebar">
+        <div class="message-profile">
+          <div class="message-avatar"></div>
+          <div class="message-user">
+            <strong>实验用户</strong>
+            <span>weibo.com</span>
+          </div>
+          <button class="message-back" id="messageBack" type="button">返回首页</button>
+        </div>
+
+        <label class="message-search">
+          <span>⌕</span>
+          <input type="search" placeholder="查找联系人或群" />
+        </label>
+
+        <button class="message-item active" type="button">
+          <span class="message-item-icon system">!</span>
+          <span class="message-item-copy">
+            <strong>系统通知</strong>
+            <em id="systemPreview">暂无新通知</em>
+          </span>
+          <time id="systemNoticeTime">--</time>
+        </button>
+      </aside>
+
+      <section class="message-panel">
+        <header class="message-panel-header">
+          <h1>系统通知</h1>
+          <button type="button" title="设置">⚙</button>
+        </header>
+
+        <div class="message-empty" id="messageEmpty">暂无系统通知</div>
+
+        <div class="notice-thread" id="noticeThread" hidden>
+          <time class="notice-time" id="noticeTime">刚刚</time>
+          <article class="notice-card">
+            <header class="notice-card-header">
+              <span class="weibo-admin-mark">◉</span>
+              <strong>微博管理员</strong>
+            </header>
+            <div class="notice-redline"></div>
+            <div class="notice-card-body">
+              <div class="notice-title-row">
+                <h2>内容声明提醒</h2>
+                <button type="button">查看详情&gt;</button>
+              </div>
+              <p id="noticeMessage">有多名平台用户认为你的帖子可能包含 AI 生成或 AI 辅助生成内容，但当前帖子未进行 AI 标注。该提示仅你本人可见，其他用户不会看到。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
